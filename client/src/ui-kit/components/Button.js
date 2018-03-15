@@ -12,7 +12,7 @@ export const Button = styled.button`
   outline: none;
   appearance: none;
   background: ${variables.colour.darkGrey};
-  color: white;
+  color: ${variables.colour.white};
   border: 1px solid ${variables.colour.darkGrey};
   > * {
     vertical-align: middle;
