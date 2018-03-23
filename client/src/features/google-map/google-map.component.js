@@ -1,26 +1,30 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import { ListItem } from "../list-item/list-item.component";
 
 var googleMapsAPIKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-if (!googleMapsAPIKey) throw new Error("googleMapsAPIKey environment variable required");
+if (!googleMapsAPIKey)
+  throw new Error("googleMapsAPIKey environment variable required");
 
 export function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?key='+googleMapsAPIKey+'&libraries=places&callback=googleMapsLoaded'; //& needed
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src =
+    "https://maps.googleapis.com/maps/api/js?key=" +
+    googleMapsAPIKey +
+    "&libraries=places&callback=googleMapsLoaded"; //& needed
   document.body.appendChild(script);
 }
 
 let map;
 let infowindow;
 let marker;
-let iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+let iconBase = "https://maps.google.com/mapfiles/kml/shapes/";
 
 export class GoogleMap extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: [],
+      results: []
     };
   }
 
@@ -31,7 +35,7 @@ export class GoogleMap extends Component {
 
   initMap = () => {
     const google = window.google;
-    var position = {lat: 43.644124, lng: -79.382277};
+    var position = { lat: 43.644124, lng: -79.382277 };
 
     map = new google.maps.Map(this.gMap, {
       center: position,
@@ -40,11 +44,14 @@ export class GoogleMap extends Component {
 
     infowindow = new google.maps.InfoWindow();
     var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-      location: position,
-      radius: 500,
-      type: ['store']
-    }, this.searchResultsReceived);
+    service.nearbySearch(
+      {
+        location: position,
+        radius: 500,
+        type: ["store"]
+      },
+      this.searchResultsReceived
+    );
 
     marker = new google.maps.Marker({
       map: map,
@@ -52,8 +59,8 @@ export class GoogleMap extends Component {
       animation: google.maps.Animation.DROP,
       position: position
     });
-    marker.addListener('click', this.toggleBounce);
-  }
+    marker.addListener("click", this.toggleBounce);
+  };
 
   searchResultsReceived = (results, status) => {
     const google = window.google;
@@ -63,25 +70,25 @@ export class GoogleMap extends Component {
         this.createMarker(results[i]);
       }
       this.setState({
-        results: results.slice(0,numOfResults)
+        results: results.slice(0, numOfResults)
       });
     }
-  }
+  };
 
-  createMarker = (place) => {
+  createMarker = place => {
     const google = window.google;
     let placeLoc = place.geometry.location;
     let marker = new google.maps.Marker({
       map: map,
       position: placeLoc,
-      icon: iconBase + 'info_maps.png'
+      icon: iconBase + "info_maps.png"
     });
 
-    google.maps.event.addListener(marker, 'click', function() {
+    google.maps.event.addListener(marker, "click", function() {
       infowindow.setContent(place.name);
       infowindow.open(map, this);
     });
-  }
+  };
 
   toggleBounce = () => {
     const google = window.google;
@@ -90,18 +97,20 @@ export class GoogleMap extends Component {
     } else {
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
-  }
+  };
 
   render() {
-    const {results} = this.state;
+    const { results } = this.state;
     return (
       <div>
         <p>Closest Locations</p>
         <ul>
-          {results.map((result, index) => <ListItem key={index} locationName={result.name} />)}
+          {results.map((result, index) => (
+            <ListItem key={index} locationName={result.name} />
+          ))}
         </ul>
-        <div className="map" ref={(gMap) => this.gMap = gMap}></div>
+        <div className="map" ref={gMap => (this.gMap = gMap)} />
       </div>
-    )
+    );
   }
 }

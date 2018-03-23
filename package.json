@@ -23,7 +23,7 @@
     "clean:client:prod": "rm -rf client/build && rm -rf build/client",
     "client:dev": "node -r dotenv/config ../node_modules/.bin/react-scripts start dotenv_config_path='../.env'",
     "client:prod": "node -r dotenv/config ../node_modules/.bin/react-scripts build dotenv_config_path='../.env'",
-    "client:test": "../node_modules/.bin/react-scripts test --coverage",
+    "client:test": "../node_modules/.bin/react-scripts test --coverage --env=jsdom",
     "configure:heroku": "heroku config:set $(node -r babel-register scripts/configure.js)",
     "lint:client": "eslint -c .eslintrc ./client/src",
     "lint:server": "eslint -c .eslintrc ./server",
