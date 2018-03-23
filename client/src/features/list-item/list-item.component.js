@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../../ui-kit/components/Button";
+import { Button } from "../../ui-kit/button";
 import styled from "styled-components";
 
 export const Item = styled.li`

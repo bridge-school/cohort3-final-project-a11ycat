@@ -1,18 +1,17 @@
-import React, { Component } from 'react';
-import { ListItem } from '../list-item/list-item.component';
-import logo from '../../logo.svg';
-import apiService from '../../shared/services/api-service';
-import { SearchBarContainer } from '../search-bar/search-bar.container';
-import { AutoCompleteListContainer } from '../auto-complete-list/auto-complete-list.container';
-import { LocationRatingContainer } from '../location-rating/location-rating.container';
+import React, { Component } from "react";
+import apiService from "../../shared/services/api-service";
+import { SearchBarContainer } from "../search-bar/search-bar.container";
+import { AutoCompleteListContainer } from "../auto-complete-list/auto-complete-list.container";
+import { LocationRatingContainer } from "../location-rating/location-rating.container";
 import { GoogleMap } from "../google-map/google-map.component";
+import { Header } from "../../ui-kit/header";
 
-export const defaultLocations = ['park', 'coffee shop', 'jungle'];
+export const defaultLocations = ["park", "coffee shop", "jungle"];
 
 export class App extends Component {
   componentDidMount() {
     apiService
-      .get('/someModels')
+      .get("/someModels")
       .then(function(response) {
         console.log(response);
       })
@@ -23,26 +22,10 @@ export class App extends Component {
   }
 
   render() {
-    const { showAutoComplete, listLocations } = this.props;
-    const showLocations =
-      listLocations.length > 0 ? listLocations : defaultLocations;
-
+    const { showAutoComplete } = this.props;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">House of A11yCats</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-
-        <ul>
-          {showLocations.map((location, index) => (
-            <ListItem key={index} locationName={location} />
-          ))}
-        </ul>
-        <hr/>
+        <Header headerText={"A11yCatz"} />
         <GoogleMap />
 
         <SearchBarContainer />

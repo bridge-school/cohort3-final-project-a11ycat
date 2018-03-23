@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { variables } from "../variables";
+import { variables } from "./variables";
 
 export const Button = styled.button`
   border-radius: ${variables.button.borderRadius};
