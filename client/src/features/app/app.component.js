@@ -5,7 +5,7 @@ import apiService from '../../shared/services/api-service';
 import { SearchBarContainer } from '../search-bar/search-bar.container';
 import { AutoCompleteListContainer } from '../auto-complete-list/auto-complete-list.container';
 import { LocationRatingContainer } from '../location-rating/location-rating.container';
-import { GoogleMap } from "../google-map/google-map.component";
+import { GoogleMapContainer } from "../google-map/google-map.container";
 
 export const defaultLocations = ['park', 'coffee shop', 'jungle'];
 
@@ -43,11 +43,9 @@ export class App extends Component {
           ))}
         </ul>
         <hr/>
-        <GoogleMap />
-
         <SearchBarContainer />
         {showAutoComplete && <AutoCompleteListContainer />}
-
+        <GoogleMapContainer/>  
         <div>
           <br />
           <br />
