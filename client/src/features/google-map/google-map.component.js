@@ -23,8 +23,3 @@ export class GoogleMapsComponent extends Component{
   />
   }
 };
-
-
-
-
-

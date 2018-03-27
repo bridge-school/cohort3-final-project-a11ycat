@@ -25,10 +25,10 @@ jobs:
           name: Run Linter
           command: yarn lint
 
-    #   - run:
-    #       name: Run Client Test Suite
-    #       command: cd ./client && yarn client:test
+      - run:
+          name: Run Client Test Suite
+          command: cd ./client && yarn client:test
 
-    #   - run:
-    #       name: Run Server Test Suite
-    #       command: cd ./server && yarn server:test
+      - run:
+          name: Run Server Test Suite
+          command: cd ./server && yarn server:test

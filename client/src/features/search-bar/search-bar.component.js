@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button } from '../../ui-kit/components/Button';
-import styled from 'styled-components';
-import { variables } from '../../ui-kit/variables';
+import React from "react";
+import { Button } from "../../ui-kit/button";
+import styled from "styled-components";
+import { variables } from "../../ui-kit/variables";
 
 const Input = styled.input`
   display: flex;
@@ -47,7 +47,7 @@ export const SearchBar = ({
 
   const handleClick = event => {
     textSearch(inputValue, userLocation.lat, userLocation.lon);
-    updateSearchInput('');
+    updateSearchInput("");
     toggleAutoComplete(false);
   };
 
