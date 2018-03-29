@@ -3,7 +3,8 @@ import {
   withScriptjs,
   withGoogleMap,
   GoogleMap,
-  Marker
+  Marker,
+  Circle
 } from "react-google-maps";
 
 var googleMapsAPIKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -15,8 +16,15 @@ const Map = withScriptjs(
     <GoogleMap
       defaultZoom={15}
       defaultCenter={props.coords}
-      >
+      gridSize={60}
+    >
       <Marker position={props.coords} />
+      <Circle
+        clickable
+        draggable
+        defaultRadius={20}
+        visible={true}
+      />
     </GoogleMap>
   ))
 );
