@@ -10,6 +10,7 @@ import { Ratings } from './map-rating.component';
 import { ToastContainer } from '../toast/toast.container';
 import { Page } from '../../ui-kit/page-style';
 import { styled } from 'styled-components';
+import { updateActiveMarker } from './google-map.actions';
 
 const google = window.google;
 const googleMapsAPIKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -18,8 +19,7 @@ if (!googleMapsAPIKey)
 
 const MapPage = Page.extend`
   margin: 20px;
-`;  
-
+`;
 
 const Map = withScriptjs(
   withGoogleMap(props => {
@@ -86,21 +86,18 @@ export class GoogleMapsComponent extends Component {
           },
           avgRating: 4
         }
-      ],
-      activeMarker: null
+      ]
     };
   }
 
-  onMarkerClick = index => {
-    this.setState({
-      activeMarker: index
-    });
+  onMarkerClick = activeMarker => {
+    this.props.updateActiveMarker(activeMarker);
   };
   onMapClicked = () => {
-    this.setState({ activeMarker: null });
+    this.props.updateActiveMarker();
   };
   onInfoClose = () => {
-    this.setState({ activeMarker: null });
+    this.props.updateActiveMarker();
   };
 
   render() {
@@ -117,7 +114,7 @@ export class GoogleMapsComponent extends Component {
           mapElement={<div style={{ height: `100%` }} />}
           coords={this.props.userCoords}
           markers={this.state.markers}
-          activeMarker={this.state.activeMarker}
+          activeMarker={this.props.activeMarker}
           onMarkerClick={this.onMarkerClick}
           onInfoClose={this.onInfoClose}
           onMapClicked={this.onMapClicked}

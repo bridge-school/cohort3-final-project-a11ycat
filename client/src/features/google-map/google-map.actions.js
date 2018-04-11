@@ -10,6 +10,15 @@ export const updateRatedPlaces = ratedPlaces => {
   };
 };
 
+export const updateActiveMarker = activeMarker => {
+  return {
+    type: GOOGLE_MAP_TYPES.updateActiveMarker,
+    payload: {
+      activeMarker
+    }
+  };
+};
+
 export const fetchMapLocations = () => {
   return dispatch => {
     return apiService
